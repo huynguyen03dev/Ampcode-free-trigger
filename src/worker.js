@@ -1,3 +1,7 @@
+function encodePayload(data) {
+  return btoa(JSON.stringify(data));
+}
+
 export default {
   async fetch(request, env) {
     const authKey = request.headers.get("x-api-key");
@@ -7,6 +11,8 @@ export default {
         headers: { "Content-Type": "application/json" }
       });
     }
+
+    const sessionCookie = `GAESA=${env.GAESA};session=${env.SESSION}`;
 
     const url = new URL(request.url);
     const isEnable = url.pathname === "/enable";
@@ -19,9 +25,8 @@ export default {
       });
     }
 
-    const payload = isEnable 
-      ? "W3siZW5hYmxlZCI6MX0sdHJ1ZV0=" 
-      : "W3siZW5hYmxlZCI6MX0sZmFsc2Vd";
+    const payloadData = [{ enabled: 1 }, isEnable];
+    const payload = encodePayload(payloadData);
 
     const res = await fetch("https://ampcode.com/_app/remote/w6b2h6/setDailyGrantEnabled", {
       method: "POST",
@@ -30,7 +35,7 @@ export default {
         "Accept": "*/*",
         "Origin": "https://ampcode.com",
         "Referer": "https://ampcode.com/settings",
-        "Cookie": env.COOKIES
+        "Cookie": sessionCookie
       },
       body: JSON.stringify({ payload, refreshes: [] })
     });
