@@ -1,6 +1,6 @@
 # Amp Free Trigger
 
-A Cloudflare Worker that toggles the Amp Free (Ad-supported Amp).
+A Cloudflare Worker to toggle Amp Free on/off via API. Amp Free is an ad-supported mode that provides $10/day of free usage across all Amp modes.
 
 ## Prerequisites
 
@@ -71,13 +71,13 @@ wrangler secret bulk secrets.json
 ### Enable Amp Free
 
 ```bash
-curl -H "x-api-key: YOUR_API_KEY" https://your-worker.workers.dev/enable
+curl -H "x-api-key: YOUR_API_KEY" https://amp-free-trigger.your-subdomain.workers.dev/enable
 ```
 
 ### Disable Amp Free
 
 ```bash
-curl -H "x-api-key: YOUR_API_KEY" https://your-worker.workers.dev/disable
+curl -H "x-api-key: YOUR_API_KEY" https://amp-free-trigger.your-subdomain.workers.dev/disable
 ```
 
 ## API Endpoints
@@ -93,21 +93,19 @@ All endpoints require the `x-api-key` header for authentication.
 
 Use this worker to enable Amp Free before web searches to save tokens. Add this to your `AGENTS.md`:
 
-```markdown
-## Web Search Protocol
+    ## Web Search Protocol
 
-**Before** first `web_search` or `read_web_page`:
-```bash
-curl -s -H "x-api-key: your-api-key" <your-worker-name>.<subdomain>.workers.dev/enable
-```
+    **Before** first `web_search` or `read_web_page`:
+    ```bash
+    curl -s -H "x-api-key: your-api-key" amp-free-trigger.your-subdomain.workers.dev/enable
+    ```
 
-**After** all web operations complete:
-```bash
-curl -s -H "x-api-key: your-api-key" <your-worker-name>.<subdomain>.workers.dev/disable
-```
+    **After** all web operations complete:
+    ```bash
+    curl -s -H "x-api-key: your-api-key" amp-free-trigger.your-subdomain.workers.dev/disable
+    ```
 
-> For multiple web operations, only enable/disable once around the entire batch.
-```
+    > For multiple web operations, only enable/disable once around the entire batch.
 
 ## Local Development
 
