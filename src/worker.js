@@ -12,7 +12,7 @@ export default {
       });
     }
 
-    const sessionCookie = `GAESA=${env.GAESA};session=${env.SESSION}`;
+    const sessionCookie = `GAESA=${env.GAESA}; session=${env.SESSION}`;
 
     const url = new URL(request.url);
     const isEnable = url.pathname === "/enable";
