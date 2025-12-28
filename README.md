@@ -125,3 +125,7 @@ Use this worker to enable Amp Free before web searches to save tokens. Add this 
    ```bash
    npm run dev
    ```
+
+## License
+
+MIT
