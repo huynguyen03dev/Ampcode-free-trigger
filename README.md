@@ -34,6 +34,12 @@ A Cloudflare Worker that toggles the Amp Free (Ad-supported Amp).
 | `SESSION` | Session cookie from ampcode.com      |
 | `APIKEY`  | API key to authenticate worker calls |
 
+### How to Get Cookies
+
+1. Go to [ampcode.com](https://ampcode.com) and log in
+2. Open DevTools (F12) → Application → Cookies → `https://ampcode.com`
+3. Copy the values of `GAESA` and `session` cookies
+
 ## Deployment
 
 ```bash
