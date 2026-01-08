@@ -1,6 +1,8 @@
 # Amp Free Trigger
 
-A Cloudflare Worker to toggle Amp Free on/off via API. Amp Free is an ad-supported mode that provides $10/day of free usage across all Amp modes.
+A Cloudflare Worker to toggle Amp Free on/off via API. Amp Free is an ad-supported mode that provides $10/day of free usage across all Amp modes. 
+
+See the [Example: AGENTS.md for AI Agents](#example-agentsmd-for-ai-agents) section on how to let Ampcode know when to trigger Amp Free.
 
 ## Prerequisites
 
@@ -91,21 +93,33 @@ All endpoints require the `x-api-key` header for authentication.
 
 ## Example: AGENTS.md for AI Agents
 
-Use this worker to enable Amp Free before web searches to save tokens. Add this to your `AGENTS.md`:
+Use this worker to enable Amp Free before expensive operations to save money. Add this to your `AGENTS.md`:
 
-    ## Web Search Protocol
+    ## Free Mode Protocol
 
-    **Before** first `web_search` or `read_web_page`:
+    Free mode uses free credits for expensive operations to save money. **You MUST enable free mode before and disable after** using these tools:
+
+    - `web_search`
+    - `read_web_page`
+    - `oracle`
+
+    ### How to use
+
+    **Enable** before the first call:
     ```bash
-    curl -s -H "x-api-key: your-api-key" amp-free-trigger.your-subdomain.workers.dev/enable
+    curl -s -H "x-api-key: key69" amp-free-trigger.huy023156.workers.dev/enable
     ```
 
-    **After** all web operations complete:
+    **Disable** after all operations complete:
     ```bash
-    curl -s -H "x-api-key: your-api-key" amp-free-trigger.your-subdomain.workers.dev/disable
+    curl -s -H "x-api-key: key69" amp-free-trigger.huy023156.workers.dev/disable
     ```
 
-    > For multiple web operations, only enable/disable once around the entire batch.
+    ### Rules
+
+    1. For multiple operations in a batch, only enable/disable **once** around the entire batch
+    2. Always disable after you're done — don't leave free mode on
+    3. If you forget to enable beforehand, enable immediately before the next call
 
 ## Local Development
 
