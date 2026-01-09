@@ -1,6 +1,8 @@
 # Amp Free Trigger
 
-A Cloudflare Worker to toggle Amp Free on/off via API. Amp Free is an ad-supported mode that provides $10/day of free usage across all Amp modes. 
+A Cloudflare Worker to toggle Amp Free on/off via API. Amp Free is an ad-supported mode that provides $10/day of free usage across all Amp modes.
+
+Enjoy free web search and oracle agent, ads only appear when you trigger free mode.
 
 See the [Example: AGENTS.md for AI Agents](#example-agentsmd-for-ai-agents) section on how to let Ampcode know when to trigger Amp Free.
 
