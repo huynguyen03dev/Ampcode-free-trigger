@@ -6,7 +6,7 @@ export default {
   async fetch(request, env) {
     const authKey = request.headers.get("x-api-key");
     if (authKey !== env.APIKEY) {
-      return new Response(JSON.stringify({ error: "Unauthorized" }), { 
+      return new Response(JSON.stringify({ error: "Unauthorized" }), {
         status: 401,
         headers: { "Content-Type": "application/json" }
       });
@@ -28,7 +28,7 @@ export default {
     const payloadData = [{ enabled: 1 }, isEnable];
     const payload = encodePayload(payloadData);
 
-    const res = await fetch("https://ampcode.com/_app/remote/w6b2h6/setDailyGrantEnabled", {
+    const res = await fetch("https://ampcode.com/_app/remote/w6b2h6/setAmpFreeEnabled", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
